@@ -1,0 +1,69 @@
+/*fonts*/
+@font-face {
+  font-family: 'techni';
+  src: asset-url('artechni.ttf', font);
+}
+$sansFontFamily: 'techni';
+$baseFontSize: 20px;
+
+/*colors*/
+$ayoopa_brown: #644117;
+$navbarLinkColor: $ayoopa_brown;
+$navbarBackground: white;
+$ayoopa_green: #669933;
+
+/* navbar */
+$reg_thickness: 3px;
+ul.nav 
+{
+  position: absolute !important;
+  top: 71px !important;
+  margin-left: 30% !important;
+}
+ul.registration 
+{
+  position: absolute !important;
+  top: 5px !important;
+  margin-left: 55% !important;
+  font-size: 20px;
+}
+ul.registration > li
+{
+  /*background-color: $ayoopa_green;*/
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-left: $reg_thickness solid $ayoopa_brown;
+  border-bottom: $reg_thickness solid $ayoopa_brown;
+  border-top: $reg_thickness solid $ayoopa_brown;
+  min-width: 130px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+ul.registration > li:last-child
+{
+  margin-left: -30px;
+  border-right: $reg_thickness solid $ayoopa_brown;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-left: $reg_thickness solid $ayoopa_brown; 
+}
+ul.registration > li:not(:last-child)
+{ 
+  min-width: 150px !important;
+}
+$navbarHeight: 40px;
+
+/*body*/
+#main
+{
+  /*background: asset-url('backgroundimage.png','images');*/ 
+  background-image: url('http://www.mountain-media.co.uk/wp-content/uploads/2012/10/The-freedom-of-the-open-road.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+
+}
+
+/* bootstrap*/
+@import "bootstrap";
+body { padding-top: 95px; }
+/*@import "bootstrap-responsive";*/

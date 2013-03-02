@@ -1,0 +1,27 @@
+<%#= link_to "ayoopa", root_path, :class => 'brand' %>
+<%= link_to image_tag("aypoopalogo2.png", :size => '300x150'), root_path(), :class => 'brand' %>
+
+<%= render :partial => 'layouts/registration' %>
+
+<ul class="nav">
+  <li>
+    <%= link_to 'home', destroy_user_session_path, :method=>'delete' %>
+  </li>
+  <li>
+    <%= link_to 'list items', destroy_user_session_path, :method=>'delete' %>
+  </li>
+  <li>
+    <%= link_to 'items wanted', destroy_user_session_path, :method=>'delete' %>
+  </li>
+  <li>
+    <%= link_to 'about', destroy_user_session_path, :method=>'delete' %>
+  </li>
+  <li>
+    <%= link_to 'contact', destroy_user_session_path, :method=>'delete' %>
+  </li>
+
+  <li>
+    <%= link_to 'community', destroy_user_session_path, :method=>'delete' %>
+  </li>
+</ul>
+<%= link_to image_tag("texaslogo.png", :size => '150x150'), "http://www.mysite.com/", :class => "pull-right" %>
