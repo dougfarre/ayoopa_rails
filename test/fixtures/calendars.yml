@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: 1
+  start_date: 2013-03-16 16:02:32
+  end_date: 2013-03-16 16:02:32
+  type: 
+
+two:
+  item_id: 1
+  start_date: 2013-03-16 16:02:32
+  end_date: 2013-03-16 16:02:32
+  type: 

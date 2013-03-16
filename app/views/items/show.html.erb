@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @item.user_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @item.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
+  <b>Caption:</b>
+  <%= @item.caption %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @item.value %>
+</p>
+
+<p>
+  <b>Cost day:</b>
+  <%= @item.cost_day %>
+</p>
+
+<p>
+  <b>Cost week:</b>
+  <%= @item.cost_week %>
+</p>
+
+<p>
+  <b>Cost month:</b>
+  <%= @item.cost_month %>
+</p>
+
+<p>
+  <b>Condition:</b>
+  <%= @item.condition %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @item.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

@@ -1,0 +1,13 @@
+# config/s3.yml
+development:
+  access_key_id: AKIAJQGTNCNNUWG5IF6A 
+  secret_code: 1QmD+TzgWRdx18JxgPpKRP24jik1+WVNamNZ8P
+  bucket: ayoopa_dev
+staging:
+  access_key_id: AKIAIXFAAIH5YUAJIUPA
+  secret_code: 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
+  bucket: ayoopa_stage
+production:
+  access_key_id: AKIAIXFAAIH5YUAJIUPA
+  secret_code: 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
+  bucket: ayoopa

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  title: MyString
+  description: MyString
+  caption: MyString
+  value: 9.99
+  cost_day: 9.99
+  cost_week: 9.99
+  cost_month: 9.99
+  condition: MyString
+  active: 
+
+two:
+  user_id: 1
+  title: MyString
+  description: MyString
+  caption: MyString
+  value: 9.99
+  cost_day: 9.99
+  cost_week: 9.99
+  cost_month: 9.99
+  condition: MyString
+  active: 

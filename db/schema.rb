@@ -11,7 +11,41 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130113202504) do
+ActiveRecord::Schema.define(:version => 20130316164021) do
+
+  create_table "calendars", :force => true do |t|
+    t.integer  "item_id",    :null => false
+    t.datetime "start_date", :null => false
+    t.datetime "end_date",   :null => false
+    t.string   "type",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "images", :force => true do |t|
+    t.integer  "item_id",                 :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
+  create_table "items", :force => true do |t|
+    t.integer  "user_id",                                                     :null => false
+    t.string   "title",                                                       :null => false
+    t.string   "description",                                                 :null => false
+    t.string   "caption",                                                     :null => false
+    t.decimal  "value",       :precision => 8, :scale => 2,                   :null => false
+    t.decimal  "cost_day",    :precision => 8, :scale => 2,                   :null => false
+    t.decimal  "cost_week",   :precision => 8, :scale => 2,                   :null => false
+    t.decimal  "cost_month",  :precision => 8, :scale => 2,                   :null => false
+    t.string   "condition",                                                   :null => false
+    t.boolean  "active",                                    :default => true
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"

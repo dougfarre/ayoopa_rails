@@ -53,4 +53,7 @@ Ayoopa::Application.configure do
 
   # Custom
   config.assets.paths << "#{Rails.root}/app/assets/fonts"
+
+  # Paperclip reference to ImageMagick
+  Paperclip.options[:command_path] = "/usr/bin/convert"
 end

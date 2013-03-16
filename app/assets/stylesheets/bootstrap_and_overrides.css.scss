@@ -15,10 +15,10 @@ $ayoopa_green: #669933;
 /* navbar */
 $reg_thickness: 3px;
 ul.nav 
-{
+{ 
   position: absolute !important;
   top: 71px !important;
-  margin-left: 30% !important;
+  margin-left: 550px !important;
 }
 ul.registration 
 {
@@ -29,15 +29,12 @@ ul.registration
 }
 ul.registration > li
 {
-  /*background-color: $ayoopa_green;*/
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-left: $reg_thickness solid $ayoopa_brown;
   border-bottom: $reg_thickness solid $ayoopa_brown;
   border-top: $reg_thickness solid $ayoopa_brown;
   min-width: 130px;
-  text-transform: uppercase;
-  font-weight: bold;
 }
 ul.registration > li:last-child
 {
@@ -60,7 +57,6 @@ $navbarHeight: 40px;
   background-image: url('http://www.mountain-media.co.uk/wp-content/uploads/2012/10/The-freedom-of-the-open-road.jpg');
   background-repeat: no-repeat;
   background-size: 100% auto;
-
 }
 
 /* bootstrap*/
