@@ -1,0 +1,41 @@
+  <div class="span3 left_bar">
+    <div class="title">
+      <div>
+        <%= link_to "dashboard", addresses_path() %>
+      </div>
+    </div>
+    <ul>
+    <li>
+      <%= image_tag "icons/envelope.png" %>
+      <%= link_to "messages", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/star.png" %>
+      <%= link_to "renting", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/outgoing.png" %>
+      <%= link_to "listing", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/user.png" %>
+      <%= link_to "public profile", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/map.png" %>
+      <%= link_to "addresses", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/credit-card.png" %>
+      <%= link_to "payment settings", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/flag.png" %>
+      <%= link_to "meetup settings", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/settings.png" %>
+      <%= link_to 'account settings', edit_user_registration_path %>
+    </li>
+    </ul>
+  </div>

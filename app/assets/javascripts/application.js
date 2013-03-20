@@ -14,3 +14,15 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+$('document').ready(function() {
+
+  if($('.change_password_row').find('span.help-inline').length > 0) {
+      $('.change_password_row').toggle();   
+  } 
+ 
+ 
+  $('#change_password_tag').click (function() {
+      $('.change_password_row').toggle();   
+  });
+});
