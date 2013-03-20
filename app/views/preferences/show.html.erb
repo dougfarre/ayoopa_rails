@@ -1,10 +1,59 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @preference.user_id %>
-</p>
+<h2><%= "#{current_user.email}'s dashboard" %></h2>  
+<hr/>
 
+<div class="row">
+  <div class="span3 left_bar">
+    <div class="title">
+    <div>
+    <%= link_to "dashboard", addresses_path() %>
+    </div>
+    </div>
+    <ul>
+    <li>
+      <%= image_tag "icons/envelope.png" %>
+      <%= link_to "messages", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/star.png" %>
+      <%= link_to "renting", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/outgoing.png" %>
+      <%= link_to "listing", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/user.png" %>
+      <%= link_to "public profile", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/map.png" %>
+      <%= link_to "addresses", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/credit-card.png" %>
+      <%= link_to "payment settings", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/settings.png" %>
+      <%= link_to "site settings", addresses_path() %>
+    </li>
+    <li>
+      <%= image_tag "icons/flag.png" %>
+      <%= link_to "meeting preferences", addresses_path() %>
+    </li>
+    </ul>
+  </div>
 
-<%= link_to 'Edit', edit_preference_path(@preference) %> |
-<%= link_to 'Back', preferences_path %>
+  <div class="span7">
+    <div class="row">
+      omgggggggggggggggggggggggggggg 
+    </div> 
+  </div>
+</div>
+
+<!--
+<%#= link_to 'Edit', edit_preference_path(@preference) %> |
+<%#= link_to 'Back', preferences_path %>
+-->

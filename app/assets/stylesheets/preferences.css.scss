@@ -1,3 +1,60 @@
 // Place all the styles related to the Preferences controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.left_bar {
+  background-color: rgb(200, 212, 245);  
+  font: { size: 1.3em !important; }
+  -webkit-border-radius: 6px 6px 6px 6px;
+  -moz-border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+
+  img {
+    margin-left: -10px;
+  }  
+
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    background-color: transparent;
+  }
+
+  ul {
+    list-style: none;
+    margin-top: 10px;
+  
+    li {
+      padding-bottom: 10px !important;
+      font: { size: 1.2em !important; }
+    }
+  }
+  
+  .title {
+    -webkit-border-radius-topright: 6px;
+    -webkit-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+
+    background-color: rgb(47, 75, 151); 
+    width: 100%;
+    overflow: auto; 
+    height: 40px;
+    
+    div {
+      margin-left: 25px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    
+      a { 
+        color: white;
+        text-decoration:underline
+      }
+    }
+  }
+}
