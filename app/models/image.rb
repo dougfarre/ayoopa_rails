@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  attr_accessible :item_id, :attachment
+  attr_accessible :attachment
 
   has_attached_file :attachment, 
     :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
@@ -8,5 +8,7 @@ class Image < ActiveRecord::Base
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :convert_options => { :all => "-auto-orient" }
 
-  belongs_to :item
+  has_many :item_images
+  has_many :items, :through => :item_images #
+  has_one :user #
 end

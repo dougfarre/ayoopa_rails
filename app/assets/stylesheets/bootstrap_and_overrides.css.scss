@@ -58,6 +58,14 @@ $navbarHeight: 40px;
   background-repeat: no-repeat;
   background-size: 100% auto;
 }
+label, input, select, textarea
+{
+  font-size: 16px !important;
+}
+h2 
+{
+  font-size: 30px !important;
+}
 
 /* bootstrap*/
 @import "bootstrap";

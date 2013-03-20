@@ -1,0 +1,40 @@
+<h2>meeting locations admin</h2>
+<hr/>
+<div class="row">
+  <div class="span6 offset3">
+    <%= gmaps4rails(@json) %>
+  </div> 
+</div>
+<br/>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th style="width: 250px;">Title</th>
+      <th style="width: 350px;">Address</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meeting_locations.each do |meeting_location| %>
+      <tr>
+        <td>
+          <% marker = meeting_location.address.gmaps_marker %>
+          <% color = meeting_location.address.gmaps_color %>
+          <%= image_tag "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + marker + "|" + color + "|000000" %>
+        </td>
+        <td><%= meeting_location.title %></td>
+        <td><%= meeting_location.address.full_street_address %></td>
+        <td>
+          <%= link_to 'Show', meeting_location %>
+          <%= link_to 'Edit', edit_meeting_location_path(meeting_location) %>
+          <%= link_to 'Destroy', meeting_location, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+        <%= link_to 'New Meeting location', new_meeting_location_path %>  
+<br/>
+

@@ -1,4 +1,13 @@
 Ayoopa::Application.routes.draw do
+  resources :meeting_locations
+
+
+  resources :preferences
+
+
+  resources :addresses
+
+
   resources :items
 
 

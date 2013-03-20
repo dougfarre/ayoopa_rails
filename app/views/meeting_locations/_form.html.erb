@@ -1,0 +1,15 @@
+<%= simple_form_for(@meeting_location) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title, label: "title", :input_html => {:style => 'width: 445px'}  %>
+
+    <%= f.simple_fields_for :address do |address| %>
+      <div class="form-inputs">
+        <%= render :partial => 'addresses/form2', :locals => {:f => address, :view_type => 'new'} %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= f.button :submit, value: "update meeting location" %>
+<% end %>

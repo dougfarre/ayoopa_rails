@@ -23,3 +23,8 @@ gem "therubyracer", ">= 0.11.0", :group => :assets, :platform => :ruby, :require
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk'
+group :development do
+  gem 'rails-erd'
+end
+gem "geocoder"
+gem "gmaps4rails"

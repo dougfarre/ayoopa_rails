@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="span12">
+    <h2><%= @meeting_location.title %></h2>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="span6">
+    <%= simple_fields_for @meeting_location.address do |address| %>
+      <%= render :partial => 'addresses/form2', :locals => {:f => address, :view_type => 'show'} %>
+    <% end %>
+  </div>
+  <div class="span6">
+    <%= gmaps4rails(@json) %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_meeting_location_path(@meeting_location) %> |
+<%= link_to 'Back', meeting_locations_path %>

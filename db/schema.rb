@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316164021) do
+ActiveRecord::Schema.define(:version => 20130319162051) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "line_one"
+    t.string   "line_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+  end
 
   create_table "calendars", :force => true do |t|
     t.integer  "item_id",    :null => false
@@ -23,13 +35,25 @@ ActiveRecord::Schema.define(:version => 20130316164021) do
   end
 
   create_table "images", :force => true do |t|
-    t.integer  "item_id",                 :null => false
+    t.integer  "item_id"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+  end
+
+  create_table "item_image", :force => true do |t|
+    t.integer "item_id"
+    t.integer "image_id"
+  end
+
+  create_table "item_images", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "image_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "items", :force => true do |t|
@@ -47,6 +71,19 @@ ActiveRecord::Schema.define(:version => 20130316164021) do
     t.datetime "updated_at",                                                  :null => false
   end
 
+  create_table "meeting_locations", :force => true do |t|
+    t.string   "title"
+    t.integer  "address_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "preferences", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -57,6 +94,26 @@ ActiveRecord::Schema.define(:version => 20130316164021) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "user_address", :force => true do |t|
+    t.integer "user_id"
+    t.integer "address_id"
+  end
+
+  create_table "user_addresses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "address_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "title"
+  end
+
+  create_table "user_meeting_locations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meeting_location_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -82,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20130316164021) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.integer  "image_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

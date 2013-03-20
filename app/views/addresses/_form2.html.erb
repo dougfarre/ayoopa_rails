@@ -1,0 +1,38 @@
+
+<% 
+  case view_type 
+    when 'new'
+      disabled = false
+      required = true
+    when 'show'
+      disabled = true 
+      required = false
+  end
+%>
+
+<div class="row">
+  <div class="span5">
+    <%= f.input :line_one, label: "address line one", required: required, disabled: disabled, :input_html => {:style => 'width: 445px'} %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span2">
+    <%= f.input :line_two, label: "address line two", disabled: disabled %>
+  </div>
+  <div class="span2 offset1">
+    <%= f.input :city, label:  "city", required: required, disabled: disabled %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span2">
+    <%= f.input :state, label: "state", required: required, disabled: disabled %>
+  </div>
+  <div class="span2 offset1">
+    <%= f.input :zip, label: "postal code", required: required, disabled: disabled %>
+  </div>
+</div>
+
+<%= f.hidden_field :latitude %>
+<%= f.hidden_field :longitude %>
