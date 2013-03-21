@@ -18,11 +18,17 @@
 $('document').ready(function() {
 
   if($('.change_password_row').find('span.help-inline').length > 0) {
-      $('.change_password_row').toggle();   
+    $('.change_password_row').toggle();   
   } 
  
  
   $('#change_password_tag').click (function() {
-      $('.change_password_row').toggle();   
+    $('.change_password_row').toggle();   
   });
+
+  /*$('#lender_settings_link').click(function () {
+    $('#dump_here').load('/user_meeting_locations');  
+  });*/
+
 });
+

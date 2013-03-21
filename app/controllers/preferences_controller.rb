@@ -13,7 +13,7 @@ class PreferencesController < ApplicationController
   # GET /preferences/1
   # GET /preferences/1.json
   def show
-    @preference = Preference.find(params[:id])
+    @preference = current_user.preference 
 
     respond_to do |format|
       format.html # show.html.erb

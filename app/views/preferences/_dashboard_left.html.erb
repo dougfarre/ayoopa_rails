@@ -1,41 +1,55 @@
-  <div class="span3 left_bar">
-    <div class="title">
-      <div>
-        <%= link_to "dashboard", addresses_path() %>
-      </div>
-    </div>
-    <ul>
-    <li>
-      <%= image_tag "icons/envelope.png" %>
-      <%= link_to "messages", addresses_path() %>
-    </li>
-    <li>
-      <%= image_tag "icons/star.png" %>
-      <%= link_to "renting", addresses_path() %>
-    </li>
-    <li>
-      <%= image_tag "icons/outgoing.png" %>
-      <%= link_to "listing", addresses_path() %>
-    </li>
-    <li>
-      <%= image_tag "icons/user.png" %>
-      <%= link_to "public profile", addresses_path() %>
-    </li>
-    <li>
-      <%= image_tag "icons/map.png" %>
-      <%= link_to "addresses", addresses_path() %>
-    </li>
-    <li>
-      <%= image_tag "icons/credit-card.png" %>
-      <%= link_to "payment settings", addresses_path() %>
-    </li>
-    <li>
-      <%= image_tag "icons/flag.png" %>
-      <%= link_to "meetup settings", addresses_path() %>
-    </li>
-    <li>
-      <%= image_tag "icons/settings.png" %>
-      <%= link_to 'account settings', edit_user_registration_path %>
-    </li>
-    </ul>
+<div class="span3 left_bar">
+<div class="title">
+  <div>
+    <%= link_to "dashboard", preference_path(:id => current_user.id) %>
   </div>
+</div>
+<ul>
+<li>
+  <a id="messages_link" href="#messages">
+    <%= image_tag "icons/envelope.png" %>
+    <span>messages</span>
+  </a>
+</li>
+<li>
+  <a id="renting_link" href="#renting">
+    <%= image_tag "icons/star.png" %>
+    <span>renting</span>
+  </a>
+</li>
+<li>
+  <a id="listing_link" href="#listing">
+    <%= image_tag "icons/outgoing.png" %>
+    <span>listing</span>
+  </a>
+</li>
+<li>
+  <a id="profile_link" href="#profile">
+  <%= image_tag "icons/user.png" %>
+  <span>public profile</span>
+  </a>
+</li>
+<li>
+  <a id="addresses_link" href="<%= user_addresses_path() %>">
+  <%= image_tag "icons/map.png" %>
+  <span>addresses</span>
+  </a>
+</li>
+<li>
+  <a id="payments_link" href="#payments">
+  <%= image_tag "icons/credit-card.png" %>
+  <span>payment settings</span>
+  </a>
+</li>
+<li>
+  <a id="lender_settings_link" href="<%= user_meeting_locations_path() %>">
+    <%= image_tag "icons/flag.png" %>
+    <span>lender settings</span>
+  </a>
+</li>
+<li>
+  <%= image_tag "icons/settings.png" %>
+  <%= link_to 'account settings', edit_user_registration_path %>
+</li>
+</ul>
+</div>

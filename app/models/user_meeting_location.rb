@@ -3,4 +3,7 @@ class UserMeetingLocation < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :meeting_location
+
+  validates :user_id, :presence => true 
+  validates :meeting_location_id, :presence => true 
 end

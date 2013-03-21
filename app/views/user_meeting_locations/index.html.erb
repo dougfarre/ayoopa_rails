@@ -1,0 +1,28 @@
+<h4>lender meetup settings</h4>
+<hr/>
+
+<% if @user_meeting_locations.length > 0 %>
+  <ul class="thumbnails">
+    <% @user_meeting_locations.each do |user_meeting_location| %>
+      <li class="span4">
+        <div class="thumbnail">
+          <img data-src="holder.js/300x200" alt="">
+          <h5>Thumbnail label</h5>
+          <p>Thumbnail caption...</p>
+          <p>
+            <%= link_to 'Edit', edit_user_meeting_location_path(user_meeting_location) %>
+            <%= link_to 'Destroy', user_meeting_location, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<br />
+<% else %>
+  <div class="margin_helper">
+    <h5>You have no meetup preferences on file!</h5> 
+    <p> Your meetup preferences will be visible to renters. You can change ...</p>
+    <%= link_to 'click to configure new meetup location', new_user_meeting_location_path %>
+  </div>
+<% end %>
+<br/>

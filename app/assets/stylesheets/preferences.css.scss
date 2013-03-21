@@ -12,7 +12,8 @@
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  height: 500px;
+  min-height: 397px;
+  overflow: auto;
 
   div.margin_helper {
     margin: 10px;
@@ -35,12 +36,13 @@
     margin-left: -10px;
   }  
 
-  a {
+  /* a {
     text-decoration: underline;
-  }
+  } */
 
   a:hover {
     background-color: transparent;
+    text-decoration: none;
   }
 
   ul {

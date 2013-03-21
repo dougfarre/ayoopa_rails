@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130319162051) do
+ActiveRecord::Schema.define(:version => 20130321145427) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line_one"
@@ -74,8 +74,19 @@ ActiveRecord::Schema.define(:version => 20130319162051) do
   create_table "meeting_locations", :force => true do |t|
     t.string   "title"
     t.integer  "address_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "instructions"
+  end
+
+  create_table "meeting_times", :force => true do |t|
+    t.integer  "meeting_location_id", :null => false
+    t.integer  "user_id",             :null => false
+    t.string   "day_of_week",         :null => false
+    t.time     "start_time",          :null => false
+    t.time     "end_time",            :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "preferences", :force => true do |t|
@@ -106,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20130319162051) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "title"
+    t.boolean  "primary"
   end
 
   create_table "user_meeting_locations", :force => true do |t|
@@ -140,6 +152,10 @@ ActiveRecord::Schema.define(:version => 20130319162051) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "image_id"
+    t.string   "phone_one"
+    t.string   "phone_two"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

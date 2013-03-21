@@ -1,0 +1,60 @@
+<fieldset><legend>lender settings</legend>
+<%= simple_form_for(current_user) do |f| %>
+<div class="row">
+  <div class="span8">
+      <!--span> these details will be visible to the other...</span-->
+  </div>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <ul class="inline">
+      <li><%= f.input :phone_one, label: "primary phone",   disabled: true, :input_html => {:style => 'width: 165px'} %></li>
+      <li><%= f.input :phone_two, label: "secondary phone", disabled: true, :input_html => {:style => 'width: 165px'} %></li>
+      <li><%= f.input :email,     label: "email",           disabled: true, :input_html => {:style => 'width: 165px'} %></li>
+      <li><p><%= link_to 'edit', edit_user_registration_path %></p></li>
+    </ul>
+  </div>
+</div>
+<% end %>
+</fieldset>
+
+  <%= form_tag "/renter_settings/create" do |f| %>
+    
+  <% end %>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="width: 250px;">Title</th>
+      <th style="width: 350px;">Address</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if false %>
+    <% @user_meeting_locations.each do |user_meeting_location| %>
+      <tr>
+        <td><%= meeting_location.title %></td>
+        <td><%= meeting_location.address.full_street_address %></td>
+        <td>
+          <%#= link_to 'Show', user_meeting_location %>
+          <%= link_to 'Edit', edit_user_meeting_location_path(user_meeting_location) %>
+          <%= link_to 'Remove', meeting_location, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+    <ul class="thumbnails">
+    <li class="span4">
+    <div class="thumbnail">
+    <img data-src="holder.js/300x200" alt="">
+    <h5>Thumbnail label</h5>
+    <p>Thumbnail caption...</p>
+    </div>
+    </li>
+    ...
+    </ul>
+

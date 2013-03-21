@@ -1,0 +1,26 @@
+
+<div class="row">
+  <div class="span12">
+    <h2><%= @user_address.title %></h2>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="span6">
+    <%= simple_fields_for @user_address.address do |address| %>
+      <%= render :partial => 'addresses/form2', :locals => {:f => address, :view_type => 'show'} %>
+    <% end %>
+    <label class="checkbox">
+      <%= check_box_tag :primary, "", @user_address.primary, :disabled => true  %> primary address
+    </label>
+
+  </div>
+  <div class="span6">
+    <%= gmaps4rails(@json) %>
+  </div>
+</div>
+
+
+<%= link_to 'Edit', edit_user_address_path(@user_address) %> |
+<%= link_to 'Destroy', @user_address, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', user_addresses_path %>

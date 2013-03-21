@@ -1,0 +1,17 @@
+<%= extends :application do %>
+<h2><%= "#{current_user.email}'s dashboard" %></h2>  
+<hr/>
+
+<div class="row">
+
+  <%= render :partial => "preferences/dashboard_left" %>
+  
+  <div class="span9 right_bar">
+    <div id="dump_here" class="margin_helper">
+      <%= yield %> 
+    </div>
+  </div>
+
+</div>
+
+<% end %>

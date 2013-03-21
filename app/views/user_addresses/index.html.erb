@@ -1,0 +1,41 @@
+<h4>my addresses</h4>
+<hr/>
+<% if @user_addresses.length > 0 %>
+  <div class="margin_helper pull-left">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>title</th>
+          <th>p</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user_addresses.each do |user_address| %>
+          <tr>
+            <td>
+              <% marker = user_address.address.gmaps_marker %>
+              <% color = user_address.address.gmaps_color %>
+              <%= image_tag "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + marker + "|" + color + "|000000" %>
+            </td>
+            <td><%= link_to user_address.title, user_address %></td>
+            <td>
+              <%= radio_button_tag :primary, user_address.id, user_address.primary %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'new address', new_user_address_path %>  
+  </div>
+
+  <div class="pull-right margin_helper">
+    <%= gmaps4rails(@json) %>
+  </div>
+<% else %>
+  <div class="margin_helper">
+    <h5>You have no addresses on file!</h5> 
+    <p> Your primary address will be used to calculate the best place to meet with other parties. You can change your primary address at any time.</p>
+    <%= link_to 'click to add new address', new_user_address_path %>  
+  </div>
+<% end %>
