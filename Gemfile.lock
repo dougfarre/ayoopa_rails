@@ -51,6 +51,8 @@ GEM
     binding_of_caller (0.6.8)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
+    bootstrap-timepicker-rails (0.1.2)
+      railties (>= 3.0)
     builder (3.0.4)
     cancan (1.6.8)
     choice (0.1.6)
@@ -203,6 +205,7 @@ DEPENDENCIES
   better_errors (>= 0.3.2)
   binding_of_caller (>= 0.6.8)
   bootstrap-sass (>= 2.2.2.0)
+  bootstrap-timepicker-rails
   cancan (>= 1.6.8)
   coffee-rails (~> 3.2.1)
   devise (>= 2.1.2)

@@ -13,9 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-timepicker
 //= require_tree .
 
 $('document').ready(function() {
+
+  $('input.dateselect-time').timepicker(); 
 
   if($('.change_password_row').find('span.help-inline').length > 0) {
     $('.change_password_row').toggle();   

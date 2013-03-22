@@ -9,6 +9,7 @@ class MeetingLocationsController < ApplicationController
         :width   => 52,
         :height  => 52
       })
+      marker.title address.gmaps_title
     end
 
     respond_to do |format|

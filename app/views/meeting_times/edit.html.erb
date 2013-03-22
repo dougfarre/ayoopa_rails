@@ -1,0 +1,7 @@
+<%= simple_form_for(@meeting_time) do |f| %>
+  <%= f.error_notification %>
+  <%= render :partial => 'form', :locals => {:f => f, :view_type => 'edit'} %>
+<% end %>
+
+<%#= link_to 'Show', @meeting_time %> |
+<%#= link_to 'Back', meeting_times_path %>

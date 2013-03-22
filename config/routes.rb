@@ -1,4 +1,7 @@
 Ayoopa::Application.routes.draw do
+  resources :meeting_times
+
+
   resources :renter_settings
 
 

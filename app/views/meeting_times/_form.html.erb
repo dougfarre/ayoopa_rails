@@ -1,0 +1,61 @@
+<% 
+  case view_type 
+    when 'new'
+      disabled = "" 
+      required = true
+    when 'show'
+      disabled = "disabled" 
+      required = false
+      edit = false
+    when 'edit'
+      disabled = "" 
+      required = false
+  end
+%>
+<div class="row"> 
+  <div class="span5">
+    <div class="btn-group" data-toggle="buttons-checkbox">
+      <%= f.hidden_field :id %>
+      <%= Date::DAYNAMES.each do |name, index| %>
+        <% if view_type == 'new' %>
+          <a class="btn"><%= name[0..1].downcase %></a>
+        <% else %>
+          <% if @meeting_time.meeting_week_days.day == index %> 
+            <a class="btn active btn-succes <%= disabled %>"><%= name[0..1].downcase %></a>
+            <%= hidden_field_tag 'meeting_time[]meeting_week_days[]', index %>
+          <% else %>
+            <a class="btn <%= disabled %>"><%= name[0..1].downcase %></a>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="span2">
+    <div class='input-append bootstrap-timepicker-component' style='display: inline;'>
+      <%= f.text_field :start_time, :class=>"dateselect-time input-small" %> 
+      <!--input class='dateselect-time input-small' type='text' data-time='12:45 PM' <%#= disabled %>-->
+      <span class='add-on'><i class='icon-time'></i></span>
+    </div>
+  </div>
+  <div class="span2">
+    <div class='input-append bootstrap-timepicker-component' style='display: inline;'>
+      <input class='dateselect-time input-small' type='text' data-time='12:45 PM' <%= disabled %>>
+      <span class='add-on'><i class='icon-time'></i></span>
+    </div>
+  </div>
+  <div class="span2">
+    <% if view_type == 'new' %>
+      <%= button_tag(type: 'submit', class: 'btn') do %>
+        <i class='icon-minus'></i> remove 
+      <% end %>
+    <% elsif view_type == 'edit' %>
+      <%= button_tag(type: 'submit', class: 'btn') do %>
+        <i class='icon-pencil'></i> update 
+      <% end %>
+    <% else %>
+      <a class="btn"><i class="icon-pencil"></i>edit</a>
+    <% end %>
+  </div>
+
+  <input type="hidden" value="<%= DateTime.now %>">
+</div>

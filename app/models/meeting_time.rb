@@ -1,12 +1,11 @@
 class MeetingTime < ActiveRecord::Base
-  attr_accessible :meeting_location_id, :user_id, :day_of_week, :start_time, :end_time
+  attr_accessible :user_meeting_location_id, :start_time, :end_time
 
-  belongs_to :user 
-  belongs_to :meeting_location
+  has_many :meeting_week_days, :dependent => :destroy
 
-  validates :meeting_location_id, :presence => true
-  validates :user_id, :presence => true
-  validates :day_of_week, :presence => true
+  belongs_to :user_meeting_location
+
+  validates :user_meeting_location_id, :presence => true
   validates :start_time, :presence => true
   validates :end_time, :presence => true
 end

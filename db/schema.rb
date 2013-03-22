@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321145427) do
+ActiveRecord::Schema.define(:version => 20130322180750) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line_one"
@@ -80,13 +80,18 @@ ActiveRecord::Schema.define(:version => 20130321145427) do
   end
 
   create_table "meeting_times", :force => true do |t|
-    t.integer  "meeting_location_id", :null => false
-    t.integer  "user_id",             :null => false
-    t.string   "day_of_week",         :null => false
-    t.time     "start_time",          :null => false
-    t.time     "end_time",            :null => false
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.time     "start_time",               :null => false
+    t.time     "end_time",                 :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "user_meeting_location_id"
+  end
+
+  create_table "meeting_week_days", :force => true do |t|
+    t.integer  "meeting_time_id"
+    t.integer  "day"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "preferences", :force => true do |t|

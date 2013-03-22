@@ -1,5 +1,5 @@
 class MeetingLocation < ActiveRecord::Base
-  attr_accessible :address_id, :title, :address_attributes, :instructions, :meeting_time_attributes
+  attr_accessible :address_id, :title, :address_attributes, :instructions
 
   belongs_to :address, :dependent => :destroy 
   accepts_nested_attributes_for :address 
@@ -8,9 +8,6 @@ class MeetingLocation < ActiveRecord::Base
   has_many :user_meeting_locations
   has_many :users, :through => :user_meeting_locations
 
-  has_many :meeting_times, :dependent => :destroy
-  accepts_nested_attributes_for :meeting_times
-  
   validates :title,   :presence => true 
 
   def self.all_addresses(meeting_locations)
@@ -27,6 +24,7 @@ class MeetingLocation < ActiveRecord::Base
     identifier = "A"
 
     MeetingLocation.all.each do |meeting_location|
+      meeting_location.address.gmaps_title = meeting_location.title 
       meeting_location.address.gmaps_marker = identifier
       meeting_location.address.gmaps_color = "%06x" % (rand * 0xffffff)
       identifier = identifier.next

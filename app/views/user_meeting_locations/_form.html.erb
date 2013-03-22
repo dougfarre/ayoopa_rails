@@ -2,9 +2,33 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= select "user_meeting_location", "meeting_location_id", MeetingLocation.all.collect {|p| [p.title, p.id ]}, {:prompt => "select location"} %>
+ 
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+ 
+  <a id="add_meeting_times" class="btn"><i class="icon-plus"></i>add availability</a>
+  <br />
+  <div id="meeting_times_area"></div>
 <% end %>
+
+<input id="user_meeting_location_id" type="hidden" value="<%= @user_meeting_location.id %>">
+<input id="new_meeting_time_path" type="hidden" value="<%= new_meeting_time_path %>">
+<input id="meeting_times_path" type="hidden" value="<%= meeting_times_path(:id => @user_meeting_location.id) %>">
+<input id="buffer" type="hidden" value="<%= @user_meeting_location.id %>">
+
+<script type='text/javascript'>
+  $('document').ready(function () {
+    if ($('#user_meeting_location_id').val() != "") {
+      $('#meeting_times_area').load($('#meeting_times_path').val()); 
+    }
+    
+    $('#add_meeting_times').click(function () {
+      $.get($('#new_meeting_time_path').val(), function(data) {
+        $('#meeting_times_area').append(data);
+        $('input.dateselect-time').timepicker(); 
+      });
+    });
+  });
+</script>
+
+

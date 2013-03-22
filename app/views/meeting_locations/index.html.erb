@@ -38,3 +38,16 @@
         <%= link_to 'New Meeting location', new_meeting_location_path %>  
 <br/>
 
+<%= content_for :scripts do %>
+  <script type="text/javascript" charset="utf-8">
+    Gmaps.map.callback = function() {
+      console.log("hi");
+
+      //for (var i = 0; i < Gmaps.map.markers.length; ++i) {
+        //console.log("ho");
+       //google.maps.event.addListener(Gmaps.map.markers[i], 'click', function() { console.log('suckit'); }); 
+       google.maps.event.addListener(marker, 'click', function() { console.log('suckit'); }); 
+      //}  
+    }
+  </script>
+<% end %>
