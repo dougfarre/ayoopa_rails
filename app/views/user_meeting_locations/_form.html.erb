@@ -1,34 +1,104 @@
-<%= simple_form_for(@user_meeting_location) do |f| %>
+<%= simple_nested_form_for(@user_meeting_location) do |f| %>
   <%= f.error_notification %>
+    <%= @user_meeting_location.errors.full_messages.to_sentence %>
+  <% unless @edit %>
+    <div class="form-inputs">
+      <%= select "user_meeting_location", "meeting_location_id", MeetingLocation.all.collect {|p| [p.title, p.id ]}, {:prompt => "select location"} %>
+      <%= f.error :meeting_location_id %>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="span6">
+      <p align="center">
+        <strong><%= @user_meeting_location.meeting_location.address.full_street_address %></strong>
+      </p>
+      <br/>
+      <br/>
+      <p align="center">
+        <strong>special instructions</strong>
+        <br/>
+        <%= text_field_tag :instructions, @user_meeting_location.meeting_location.instructions, :disabled => true, :style=>"resize: none; width: 100%; height: 40px;" %>
+      </p>
+      </div>
+      <div class="span6">
+            <% lat  = @user_meeting_location.meeting_location.address.latitude %>
+            <% lon  = @user_meeting_location.meeting_location.address.longitude %>
+            <%= image_tag "http://maps.google.com/maps/api/staticmap?center=" + 
+                  lat.to_s  + "," + 
+                  lon.to_s  + "&zoom=14&markers=size:mid|" +
+                  lat.to_s  + "," +
+                  lon.to_s  + "&size=400x150&sensor=false"
+            %>
+      </div>
+    </div>
+ 
+  <% end %>
 
-  <div class="form-inputs">
-    <%= select "user_meeting_location", "meeting_location_id", MeetingLocation.all.collect {|p| [p.title, p.id ]}, {:prompt => "select location"} %>
- 
+  <h5>your prefered availability</h5>
+  <hr/> 
+    <%= f.fields_for :meeting_times, :wrapper => false do |times_form| %>
+      <div id="current_meeting_times_area">
+        <%= render :partial => 'meeting_times/form', :locals => {:f => times_form, :view_type => 'new'} %>
+      </div>
+      <div id="new_meeting_times_area"></div>
+    <% end %>
+      <%= f.link_to_add "add row", :meeting_times, "data-target" => "#new_meeting_times_area" %> &nbsp; <i class="icon-plus"></i>
+  <div class="row">
+    <div class="span12">
+      <p class="pull-left">
+        <br/>
+        <%= f.button :submit, value: "save meetup details" %>
+      </p>
+    </div>
   </div>
- 
-  <a id="add_meeting_times" class="btn"><i class="icon-plus"></i>add availability</a>
-  <br />
-  <div id="meeting_times_area"></div>
 <% end %>
 
 <input id="user_meeting_location_id" type="hidden" value="<%= @user_meeting_location.id %>">
 <input id="new_meeting_time_path" type="hidden" value="<%= new_meeting_time_path %>">
 <input id="meeting_times_path" type="hidden" value="<%= meeting_times_path(:id => @user_meeting_location.id) %>">
-<input id="buffer" type="hidden" value="<%= @user_meeting_location.id %>">
 
 <script type='text/javascript'>
-  $('document').ready(function () {
-    if ($('#user_meeting_location_id').val() != "") {
-      $('#meeting_times_area').load($('#meeting_times_path').val()); 
-    }
-    
-    $('#add_meeting_times').click(function () {
-      $.get($('#new_meeting_time_path').val(), function(data) {
-        $('#meeting_times_area').append(data);
-        $('input.dateselect-time').timepicker(); 
-      });
-    });
+  $(document).on('nested:fieldAdded', function(event){
+    $('input.dateselect-time').timepicker(); 
+    activateToggleButtons(); 
   });
+
+ $('document').ready(function () {
+    activateToggleButtons(); 
+    populateToggleButtons();
+    populateTimePickers();
+    fixAddLink();
+  });
+
+  function activateToggleButtons() {
+    $('.btn-group a').click(function(event) {
+      if ($(this).hasClass('active') !=  true) {
+        $(this).addClass('btn-primary');
+        $(this).nextAll('input:checkbox:first').prop('checked', true); 
+      } else {
+        $(this).removeClass('btn-primary');
+        $(this).nextAll('input:checkbox:first').prop('checked', false); 
+      }
+    });
+  }
+
+  function populateToggleButtons() {
+    $('.btn-group a').each(function () {
+      if ($(this).nextAll('input:checkbox:first').prop('checked') == true) {
+        $(this).addClass('btn-primary');
+        $(this).addClass('active');
+      }
+    });
+  }
+
+  function populateTimePickers() {
+    //$('input.dateselect-time').timepicker('setTime', $(this).nextAll("[id^='server_time']:first").val());
+    //$('input.dateselect-time').timepicker('setTime', "12:00 PM");
+  }
+
+  function fixAddLink() {
+    $('a.add_nested_fields, i.icon-plus').addClass("pull-right");
+    $('a.add_nested_fields').css("margin-right", "170px");
+    $('i.icon-plus').css("margin-right", "-80px");
+  }
 </script>
-
-

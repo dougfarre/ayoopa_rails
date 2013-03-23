@@ -1,6 +1,7 @@
-<h1>Editing user_meeting_location</h1>
+<h3><%= @user_meeting_location.meeting_location.title %></h3>
+<hr/>
 
-<%= render 'form' %>
+<%= render 'form', :locals => {:view_type => 'edit'} %>
 
 <%= link_to 'Show', @user_meeting_location %> |
 <%= link_to 'Back', user_meeting_locations_path %>

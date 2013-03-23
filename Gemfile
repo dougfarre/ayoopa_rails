@@ -32,3 +32,5 @@ gem "nestive"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'bootstrap-timepicker-rails'
+gem "nested_form"
+

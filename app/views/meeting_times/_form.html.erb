@@ -12,42 +12,42 @@
       required = false
   end
 %>
+<% @meeting_time ||= f.object %>
 <div class="row"> 
   <div class="span5">
-    <div class="btn-group" data-toggle="buttons-checkbox">
-      <%= f.hidden_field :id %>
-      <%= Date::DAYNAMES.each do |name, index| %>
-        <% if view_type == 'new' %>
-          <a class="btn"><%= name[0..1].downcase %></a>
-        <% else %>
-          <% if @meeting_time.meeting_week_days.day == index %> 
-            <a class="btn active btn-succes <%= disabled %>"><%= name[0..1].downcase %></a>
-            <%= hidden_field_tag 'meeting_time[]meeting_week_days[]', index %>
+    <div class="btn-group pull-right" data-toggle="buttons-checkbox">
+      <%= Date::DAYNAMES.each do |name| %>
+          <% if view_type == 'new' %>
+            <a class="btn"><%= name[0..1].downcase %></a>
           <% else %>
-            <a class="btn <%= disabled %>"><%= name[0..1].downcase %></a>
+            <% if @meeting_time.send(name[0..2].downcase) == true %> 
+              <a class="btn active btn-success"><%= name[0..1].downcase %></a>
+            <% else %>
+              <a class="btn"><%= name[0..1].downcase %></a>
+            <% end %>
           <% end %>
-        <% end %>
+          <%= f.check_box name[0..2].downcase, :style => 'display: none;' %>
       <% end %>
     </div>
   </div>
   <div class="span2">
     <div class='input-append bootstrap-timepicker-component' style='display: inline;'>
-      <%= f.text_field :start_time, :class=>"dateselect-time input-small" %> 
-      <!--input class='dateselect-time input-small' type='text' data-time='12:45 PM' <%#= disabled %>-->
+      <% start_time = @meeting_time.start_time.strftime("%I:%M %p") %>
+      <%= f.text_field :start_time, :class => "dateselect-time input-small", :data => { "default-time" => start_time } %> 
       <span class='add-on'><i class='icon-time'></i></span>
     </div>
   </div>
   <div class="span2">
     <div class='input-append bootstrap-timepicker-component' style='display: inline;'>
-      <input class='dateselect-time input-small' type='text' data-time='12:45 PM' <%= disabled %>>
+      <% end_time = @meeting_time.end_time.strftime("%I:%M %p") %>
+      <%= hidden_field_tag 'server_time_end', end_time %>
+      <%= f.text_field :end_time, :class => "dateselect-time input-small", :data => { "default-time" => end_time } %> 
       <span class='add-on'><i class='icon-time'></i></span>
     </div>
   </div>
   <div class="span2">
     <% if view_type == 'new' %>
-      <%= button_tag(type: 'submit', class: 'btn') do %>
-        <i class='icon-minus'></i> remove 
-      <% end %>
+      <%= f.link_to_remove "remove" %> &nbsp; <i class="icon-trash"></i>
     <% elsif view_type == 'edit' %>
       <%= button_tag(type: 'submit', class: 'btn') do %>
         <i class='icon-pencil'></i> update 
@@ -56,6 +56,4 @@
       <a class="btn"><i class="icon-pencil"></i>edit</a>
     <% end %>
   </div>
-
-  <input type="hidden" value="<%= DateTime.now %>">
 </div>

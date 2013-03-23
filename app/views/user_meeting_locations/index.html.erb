@@ -4,12 +4,26 @@
 <% if @user_meeting_locations.length > 0 %>
   <ul class="thumbnails">
     <% @user_meeting_locations.each do |user_meeting_location| %>
-      <li class="span4">
-        <div class="thumbnail">
-          <img data-src="holder.js/300x200" alt="">
-          <h5>Thumbnail label</h5>
-          <p>Thumbnail caption...</p>
-          <p>
+      <li class="span3" style="margin-right: -10px; height: 100%;">
+        <div class="thumbnail" style="text-align: center;">
+          <strong><p align="center"><%= user_meeting_location.meeting_location.title %></p></strong>
+            <% lat  = user_meeting_location.meeting_location.address.latitude %>
+            <% lon  = user_meeting_location.meeting_location.address.longitude %>
+            <% url  = "http://maps.google.com/maps/api/staticmap?center=" + 
+              lat.to_s  + "," + 
+              lon.to_s  + "&zoom=11&markers=size:mid|" +
+              lat.to_s  + "," +
+              lon.to_s  + "&size=150x150&sensor=false"
+            %>
+            <%= link_to image_tag(url), edit_user_meeting_location_path(user_meeting_location) %>
+          <br/>
+          <p align="center" style="font-size: 10px;">
+            <% user_meeting_location.meeting_times.each do |meeting_time| %>
+              <%= meeting_time.to_s %>
+              <br/> 
+            <% end %> 
+          </p>
+          <p align="center">
             <%= link_to 'Edit', edit_user_meeting_location_path(user_meeting_location) %>
             <%= link_to 'Destroy', user_meeting_location, method: :delete, data: { confirm: 'Are you sure?' } %>
           </p>
@@ -17,12 +31,17 @@
       </li>
     <% end %>
   </ul>
+    <div class="row">
+      <div class="span3 offset3">
+          <%= link_to 'add new meetup location', new_user_meeting_location_path %>
+      </div>
+    </div>
 <br />
 <% else %>
   <div class="margin_helper">
     <h5>You have no meetup preferences on file!</h5> 
     <p> Your meetup preferences will be visible to renters. You can change ...</p>
-    <%= link_to 'click to configure new meetup location', new_user_meeting_location_path %>
+    <%= link_to 'click add new meetup location', new_user_meeting_location_path %>
   </div>
 <% end %>
 <br/>

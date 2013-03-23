@@ -25,6 +25,7 @@ class UserMeetingLocationsController < ApplicationController
   # GET /user_meeting_locations/new.json
   def new
     @user_meeting_location = UserMeetingLocation.new
+    @user_meeting_location.meeting_times.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,16 +36,18 @@ class UserMeetingLocationsController < ApplicationController
   # GET /user_meeting_locations/1/edit
   def edit
     @user_meeting_location = UserMeetingLocation.find(params[:id])
+    @edit = true
   end
 
   # POST /user_meeting_locations
   # POST /user_meeting_locations.json
   def create
     @user_meeting_location = UserMeetingLocation.new(params[:user_meeting_location])
-
+    @user_meeting_location.user_id = current_user.id
+    
     respond_to do |format|
       if @user_meeting_location.save
-        format.html { redirect_to @user_meeting_location, notice: 'User meeting location was successfully created.' }
+        format.html { redirect_to user_meeting_locations_path, notice: 'User meeting location was successfully created.' }
         format.json { render json: @user_meeting_location, status: :created, location: @user_meeting_location }
       else
         format.html { render action: "new" }
@@ -60,7 +63,7 @@ class UserMeetingLocationsController < ApplicationController
 
     respond_to do |format|
       if @user_meeting_location.update_attributes(params[:user_meeting_location])
-        format.html { redirect_to @user_meeting_location, notice: 'User meeting location was successfully updated.' }
+        format.html { redirect_to user_meeting_locations_path, notice: 'User meeting location was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
