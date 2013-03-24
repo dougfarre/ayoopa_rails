@@ -4,7 +4,7 @@
 <% if @user_meeting_locations.length > 0 %>
   <ul class="thumbnails">
     <% @user_meeting_locations.each do |user_meeting_location| %>
-      <li class="span3" style="margin-right: -10px; height: 100%;">
+      <li class="span3" style="margin-right: -10px; height: 100%; background-color: white;">
         <div class="thumbnail" style="text-align: center;">
           <strong><p align="center"><%= user_meeting_location.meeting_location.title %></p></strong>
             <% lat  = user_meeting_location.meeting_location.address.latitude %>
@@ -17,7 +17,7 @@
             %>
             <%= link_to image_tag(url), edit_user_meeting_location_path(user_meeting_location) %>
           <br/>
-          <p align="center" style="font-size: 10px;">
+          <p align="center" style="height: 60px; font-size: 10px; margin-top:5px; margin-bottom: px;">
             <% user_meeting_location.meeting_times.each do |meeting_time| %>
               <%= meeting_time.to_s %>
               <br/> 

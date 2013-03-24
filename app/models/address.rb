@@ -1,7 +1,7 @@
 class Address < ActiveRecord::Base
   attr_accessible :city, :line_one, :line_two, :state, :zip, :latitude, :longitude
 
-  attr_accessor :gmaps_marker, :gmaps_color, :primary, :gmaps_title
+  attr_accessor :gmaps_marker, :gmaps_color, :primary, :gmaps_title, :gmaps_parent_id
    
   has_many :user_addresses
   has_many :users, :through => :user_addresses

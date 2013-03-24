@@ -27,6 +27,19 @@ class UserMeetingLocationsController < ApplicationController
     @user_meeting_location = UserMeetingLocation.new
     @user_meeting_location.meeting_times.build
 
+    meeting_locations = MeetingLocation.all_with_marker
+    @meets_json = MeetingLocation.reduce(meeting_locations).to_json
+    @gmaps_json = MeetingLocation.all_addresses(meeting_locations).to_gmaps4rails do |address, marker|
+      marker.picture({
+        :picture => "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + address.gmaps_marker + "|" + address.gmaps_color + "|000000", 
+        :width   => 52,
+        :height  => 52,
+        :id      => address.gmaps_parent_id 
+      })
+      marker.title address.gmaps_title
+    end
+
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user_meeting_location }

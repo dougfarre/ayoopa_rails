@@ -14,10 +14,10 @@ class MeetingTime < ActiveRecord::Base
   def to_s
     string = '' 
     Date::DAYNAMES.each do |d_name|
-       string << d_name[0..2].downcase + " & " if self.send(d_name[0..2].downcase) == true
+       string << d_name[0..2].downcase + ", " if self.send(d_name[0..2].downcase) == true
     end
     string = string[0..-3] 
-    string << " from " + self.start_time.strftime("%I:%M%p") + " to " + self.end_time.strftime("%I:%M%p")
+    string << " from " + self.start_time.strftime("%-I:%M%p") + " to " + self.end_time.strftime("%I:%M%p")
   end
   
   private

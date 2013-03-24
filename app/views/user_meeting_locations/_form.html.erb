@@ -2,8 +2,38 @@
   <%= f.error_notification %>
     <%= @user_meeting_location.errors.full_messages.to_sentence %>
   <% unless @edit %>
+    <div class="row">
+      <div class="span6">
+      <p align="center">
+        <h5><div id="selected_title">
+          1) select a location on the map 
+          </br>
+          2) enter availability below 
+          <p>
+             
+          </p>
+        </div></h5>
+        <div id="selected_address"></div>
+      </p>
+      <br/>
+      <br/>
+      <p style="display: none;" id="selected_instructions" align="center">
+        <strong>special instructions</strong>
+        <br/>
+        <%= text_field_tag :selected_instructions, '', :disabled => true, :style=>"resize: none; width: 100%; height: 40px;" %>
+      </p>
+      </div>
+      <div class="span6">
+        <%= gmaps4rails(@gmaps_json) %>
+        <div style="display:none;" id="meeting_locations_list">
+          <%= @meets_json %>
+        </div> 
+      </div>
+    </div>
+
     <div class="form-inputs">
-      <%= select "user_meeting_location", "meeting_location_id", MeetingLocation.all.collect {|p| [p.title, p.id ]}, {:prompt => "select location"} %>
+      <%#= select "user_meeting_location", "meeting_location_id", MeetingLocation.all.collect {|p| [p.title, p.id ]}, {:prompt => "select location"} %>
+      <%= f.hidden_field :meeting_location_id %>
       <%= f.error :meeting_location_id %>
     </div>
   <% else %>
@@ -34,7 +64,7 @@
  
   <% end %>
 
-  <h5>your prefered availability</h5>
+  <h5>availability</h5>
   <hr/> 
     <%= f.fields_for :meeting_times, :wrapper => false do |times_form| %>
       <div id="current_meeting_times_area">
@@ -58,16 +88,20 @@
 <input id="meeting_times_path" type="hidden" value="<%= meeting_times_path(:id => @user_meeting_location.id) %>">
 
 <script type='text/javascript'>
+  var meeting_locations;
+
   $(document).on('nested:fieldAdded', function(event){
     $('input.dateselect-time').timepicker(); 
     activateToggleButtons(); 
   });
 
  $('document').ready(function () {
+    meeting_locations = JSON.parse($('#meeting_locations_list').html());
     activateToggleButtons(); 
     populateToggleButtons();
-    populateTimePickers();
     fixAddLink();
+    registerGmapsCallback();
+    reloadMeetingLocationData();
   });
 
   function activateToggleButtons() {
@@ -91,14 +125,49 @@
     });
   }
 
-  function populateTimePickers() {
-    //$('input.dateselect-time').timepicker('setTime', $(this).nextAll("[id^='server_time']:first").val());
-    //$('input.dateselect-time').timepicker('setTime', "12:00 PM");
-  }
-
   function fixAddLink() {
     $('a.add_nested_fields, i.icon-plus').addClass("pull-right");
     $('a.add_nested_fields').css("margin-right", "170px");
     $('i.icon-plus').css("margin-right", "-80px");
+  }
+
+  function registerGmapsCallback() {
+    Gmaps.map.callback = function() {
+    for (var i = 0; i <  this.markers.length; ++i) {
+      var marker = Gmaps.map.markers[i];
+      google.maps.event.addListener(
+        marker.serviceObject, 'click', (function(i) {
+          return function() {
+            populateMeetingFields(Gmaps.map.markers[i].id);         
+          }
+        })(i));
+      }
+    }; 
+  }
+
+  function populateMeetingFields(meeting_id) {
+    var fields = searchJson(meeting_id);
+    
+    $("#selected_title").html(fields['title']); 
+    $("#selected_address").html(fields['address']); 
+    $("#selected_intructions").html(fields['instructions']); 
+    $("#user_meeting_location_meeting_location_id").val(fields['meeting_location_id']);
+    $("#selected_instructions").show();
+  }
+
+  function searchJson(meeting_id) {
+    var obj = meeting_locations;
+
+    for (var i=0 ; i < obj.length ; i++) {
+      if (obj[i]['meeting_location_id'] == meeting_id) {
+        return obj[i];
+      }
+    }
+  }
+
+  function reloadMeetingLocationData()
+    if ($("#user_meeting_location_meeting_location_id").val() != "") {
+      populateMeetingFields($("#user_meeting_location_meeting_location_id").val());
+    }
   }
 </script>
