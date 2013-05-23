@@ -14,7 +14,7 @@ class PreferencesController < ApplicationController
   # GET /preferences/1.json
   def show
     @preference = current_user.preference 
-
+    @dashboard = dashboard_hash  
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @preference }
@@ -80,4 +80,27 @@ class PreferencesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+  def dashboard_hash
+    dashboard = Hash.new
+   
+    dashboard['address'] = true unless UserAddress.where(:user_id => current_user.id).count < 1
+    dashboard['meetups'] = UserMeetingLocation.where(:user_id => current_user.id).count 
+    dashboard['phone'] = true unless current_user.phone_one.blank?  
+
+
+    counter = 0
+    counter += 1 if dashboard['address']
+    counter += [dashboard['meetups'], 3].min
+    counter += 1 if dashboard['phone']
+     
+    dashboard['percentage']  = ((counter.to_f / 5)*100).ceil
+     
+    return dashboard
+  end
+
 end
+
+

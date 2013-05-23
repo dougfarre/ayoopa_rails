@@ -1,12 +1,24 @@
 <p id="notice"><%= notice %></p>
-<h2><%= "#{current_user.email}'s dashboard" %></h2>  
-<hr/>
 
-<div class="row">
-  <%= render :partial => "dashboard_left" %>
-  
-  <div class="span9 right_bar">
-    <div id="dump_here" class="margin_helper">  
-    </div>
-  </div>
+<h5>your Ayoopa account is <%= @dashboard['percentage'] %>% complete</h5>
+
+<div class="progress">
+   <div class="bar" style="width: <%= @dashboard['percentage'] %>%;"></div>
 </div>
+
+<p>
+  you still need to: 
+  <ul>
+    <% unless @dashboard['address'] %>
+      <li>add an address (<%= link_to 'addresses', user_addresses_path %>)</li>
+    <% end %>
+  
+    <% if (@dashboard['meetups'] - 3) < 0 %>
+      <li>add <%= (@dashboard['meetups'] - 3) %> meetup locations (<%= link_to 'lender settings', user_meeting_locations_path %>)</li>
+    <% end %>
+    
+    <% unless @dashboard['phone'] %>
+      <li>add your phone number (<%= link_to 'account settings', edit_user_registration_path %>)</li>
+    <% end %>
+  </ul>
+</p>
